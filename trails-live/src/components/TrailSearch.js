@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './TrailSearch.css';
 import axios from 'axios';
+import SearchResult from './SearchResult';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 
 
@@ -53,6 +54,7 @@ const TrailSearch = (props) => {
 
   const onSearchSubmit = (event) => {
     event.preventDefault();
+
     const newKeywordResults = searchResults.filter(trail => trail.name.toLowerCase().includes(searchBar.toLowerCase()));
     setKeywordResults(newKeywordResults);
     setSearchBar('');
@@ -83,16 +85,13 @@ const TrailSearch = (props) => {
 
   const allKeywordResults = keywordResults.map((trail) => {
     return (
-      <div key={trail.id}>
-        {trail.name}
-      </div>
+      <SearchResult key={trail.id} trail={trail} />
     );
   })
 
 
   return (
     <div className="container d-flex flex-column" >
-      <h1>TRAILSEARCH</h1>
 
       {/* <form onSubmit={onSelectSubmit}> */}
         <select value={stateSelected.value} onChange={onSelectState} className="custom-select">
@@ -126,11 +125,11 @@ const TrailSearch = (props) => {
         </div>
       </form>
 
-      <h3>Keyword Results</h3>
+      {/* <h3>Keyword Results</h3> */}
       {allKeywordResults}
 
-      <h3>Explore Trails in {stateSelected.value} </h3>
-      {allSearchResults}
+      {/* <h3>Explore Trails in {stateSelected.value} </h3>
+      {allSearchResults} */}
 
     </div>
 

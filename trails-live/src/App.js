@@ -30,9 +30,8 @@ const WrappedMap = withScriptjs(withGoogleMap(Map))
 
 function App() {
   return (
-    <div className="App">
-      Trails LIVE
-      <Trail />
+    <div className="App container">
+      <h1> Trails LIVE </h1>
 
       <TrailSearch />
     </div>
