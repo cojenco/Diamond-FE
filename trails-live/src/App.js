@@ -2,6 +2,7 @@ import React from 'react';
 import Trail from './components/Trail';
 import './App.css';
 import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
+import TrailSearch from './components/TrailSearch';
 
 function Map() {
   return (
@@ -32,6 +33,8 @@ function App() {
     <div className="App">
       Trails LIVE
       <Trail />
+
+      <TrailSearch />
     </div>
   );
 }
