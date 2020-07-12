@@ -70,53 +70,48 @@ const Trail = ({ externalID }) => {
       <p> ❤️ oo people subscribed </p>
 
       <div>
-        <a href="#!" class="btn btn-outline-danger"> ❤️ Subscribe to Trail</a>
-        <a href="#!" class="btn btn-outline-warning"> ⚡ Update Live Status</a>
+        <a href="#!" className="btn btn-outline-danger"> ❤️ Subscribe to Trail</a>
+        <a href="#!" className="btn btn-outline-warning"> ⚡ Update Live Status</a>
       </div>
 
-      <div class="card-deck">
-        {/* <div class="card">
-          <div class="card-header">
-            <p> ❤️ oo people subscribed </p>
-          </div>
-        </div> */}
-        <div class="card">
-          <div class="card-header">
+      <div className="card-deck">
+        <div className="card">
+          <div className="card-header">
             <p> 🅿️ Parking </p>
           </div>
-          <div class="card-body">
-            <p class="card-text"> 75% Full</p>
+          <div className="card-body">
+            <p className="card-text"> 75% Full</p>
             <a className="card-link"> timestamp here </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
+        <div className="card">
+          <div className="card-header">
             <p> ❄️ Weather </p>
           </div>
-          <div class="card-body">
-            <p class="card-text"> Thunder</p>
+          <div className="card-body">
+            <p className="card-text"> Thunder</p>
             <a className="card-link"> timestamp here </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
+        <div className="card">
+          <div className="card-header">
             <p> 🥾 Visitors </p>
           </div>
-          <div class="card-body">
-            <p class="card-text"> 🦶🦶🦶🦶🦶👩🏻‍🤝‍👩🏽👩🏻‍🤝‍👩🏽‍🦶👣</p>
+          <div className="card-body">
+            <p className="card-text"> 🦶🦶🦶🦶🦶👩🏻‍🤝‍👩🏽👩🏻‍🤝‍👩🏽‍🦶👣</p>
             <a className="card-link"> timestamp here </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
+      <div className="card">
+        <div className="card-header">
           <p> 🚧 Other Conditions Update </p>
         </div>
-        <div class="card-body">
+        <div className="card-body">
           <a className="card-link"> {trailData.conditionStatus} </a>
           <a className="card-link"> {trailData.conditionDetails} </a>
           <a className="card-link"> {trailData.conditionDate} </a>
