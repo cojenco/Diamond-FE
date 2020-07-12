@@ -9,7 +9,7 @@ const SearchResult = ({ trail }) => {
   return (
     <div className="card">
       <div className="card-body">
-        <h4 className="card-title"> <a href="#!"> {trail.name} </a> </h4>
+        <h4 className="card-title"> <a href={`/trail/${trail.id}`}> {trail.name} </a> </h4>
         
         
         <p className="card-text mb-2 text-muted"> {trail.summary} </p>

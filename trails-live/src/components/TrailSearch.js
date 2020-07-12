@@ -75,13 +75,13 @@ const TrailSearch = (props) => {
   //   })
   // }
 
-  const allSearchResults = searchResults.map((trail) => {
-    return (
-      <div key={trail.id}>
-        {trail.name}
-      </div>
-    );
-  })
+  // const allSearchResults = searchResults.map((trail) => {
+  //   return (
+  //     <div key={trail.id}>
+  //       {trail.name}
+  //     </div>
+  //   );
+  // })
 
   const allKeywordResults = keywordResults.map((trail) => {
     return (
