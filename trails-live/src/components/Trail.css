@@ -1,7 +1,11 @@
-.trail-img {
+.trail-main-container > * {
+  margin: 3rem 0;
+}
+
+/* .trail-img {
   height: 60vh;
   width: auto;
-}
+} */
 
 .status-img {
   height: 30vh;

@@ -51,7 +51,7 @@ const Trail = ({ externalID }) => {
 
 
   return (
-    <div className="container ">
+    <div className="container trail-main-container ">
 
       <div className="card">
         <img className="card-img trail-img" src={trailData.imgMedium} alt="Card image" />
@@ -76,14 +76,45 @@ const Trail = ({ externalID }) => {
 
     
       <div className="card-deck">
-        {/* <div class="card">
-          <img class="card-img-top" src="https://lh3.googleusercontent.com/pw/ACtC-3d8CpznyJCbdbAsNomKbBcF_jz5Yj1xGF0OdePC_XArTlw2q9T0q7_W-DHbrzwRsoOpt8rDfpnCk1e3t5FWH6OSe9_8oiId052ykWxZht4SEl5QrpMm6az20iE6TMAzUX9f4cDwRu4-tvk9WUUIvLiavw=w1840-h1226-no?authuser=0" alt="Card image cap" />
-          <div class="card-body">
+        <div className="card">
+          <img className="card-img card-img-top" src="https://lh3.googleusercontent.com/pw/ACtC-3cnK49FbkKIBreGnKxXexLYxK_Ta57aITBbQE4yYtRyV3foDMd9HyGBpUouADLSY4Q0dda1BzXbAhyUSFSoVTu7WjDpcCl5Drl9G2ndLkD-M3xiYW-PzMnjINXnr5erFkWNK3b9VqlQJneARaytSH2FgA=w1692-h1128-no?authuser=0" alt="Card image cap" />
+          <div className="card-img-overlay text-center text-light">
+            <h3> Parking </h3>
+          </div>
+          <div className="card-body">
             <p className="card-text">🅿️ Parking 75% Full </p>
             <a className="card-link"> timestamp here </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
-        </div> */}
+        </div>
+
+        <div className="card">
+          <img className="card-img card-img-top" src="https://lh3.googleusercontent.com/pw/ACtC-3f_QJYX55Fplkf43FB_1lXkjVLOj879wdVAiqOJiXkoUaP1fw_suexKflTRns3kQO1KRVj3jezRQT5V9JeutIc8UHRqRrFG9IiToFRoounFyIWAqJaQ1_40R6fvQ2BNczZ12YGQILNUxM6AzXn98xuvQg=w1840-h1226-no?authuser=0" alt="Card image cap" />
+          <div className="card-img-overlay text-center text-light">
+            <h3> Visitors </h3>
+          </div>
+          <div className="card-body">
+            <p className="card-text"> 🥾 Visitors 5-10 ppl within 0.1 mi </p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div>
+
+        <div className="card">
+          <img className="card-img card-img-top" src="https://lh3.googleusercontent.com/pw/ACtC-3e6hm4nmqR9HWG4fPUvAyeWoSo34lYA9J0vv01VgLPbI4zyvEZ-CESUVZnycYH-Xv6_M9MXnGFRPVZFPM_IFqY6ExQPKlM-2bGW9FOzuYEzevXsKz97QIbEg39i4zPXueR1GQk_jVD3uYtODbqBt8X8ZQ=w1840-h1226-no?authuser=0" alt="Card image cap" />
+          <div className="card-img-overlay text-center text-light">
+            <h3> Weather </h3>
+          </div>
+          <div className="card-body">
+            <p className="card-text"> ❄️ Weather Thunder </p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div>
+      </div>
+
+
+      {/* <div className="card-deck">
         <div className="card">
           <div className="card-body">
             <p className="card-text">🅿️ Parking </p>
@@ -117,7 +148,7 @@ const Trail = ({ externalID }) => {
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
-      </div>
+      </div> */}
 
 
       {/* <div className="card-deck">
@@ -152,7 +183,7 @@ const Trail = ({ externalID }) => {
           </div>
         </div>
       </div> */}
-
+      { trailData.conditionStatus == 'Unknown' ? "" :
       <div className="card">
         <div className="card-header">
           <p> 🚧 Other Conditions Update </p>
@@ -163,8 +194,7 @@ const Trail = ({ externalID }) => {
           <a className="card-link"> {trailData.conditionDate} </a>
         </div>
       </div>
-
-      
+      }
 
       <div className="card">
         <div className="card-body">
@@ -178,7 +208,7 @@ const Trail = ({ externalID }) => {
         </div>
       </div>
 
-      {/* <div style={{ width: '100vw', height: '50vh'}} >
+      {/* <div style={{ width: '85vw', height: '50vh'}} >
         <WrappedMap 
           googleMapURL= {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
           loadingElement={<div style={{ height: "100%" }} />}
