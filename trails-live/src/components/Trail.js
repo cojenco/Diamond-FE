@@ -53,8 +53,8 @@ const Trail = ({ externalID }) => {
   return (
     <div className="container ">
 
-      <div className="card w-75">
-        <img className="card-img" src={trailData.imgMedium} alt="Card image" />
+      <div className="card">
+        <img className="card-img trail-img" src={trailData.imgMedium} alt="Card image" />
         <div className="card-img-overlay">
           <p className="card-text"></p>
         </div>
@@ -74,7 +74,53 @@ const Trail = ({ externalID }) => {
         <a href="#!" className="btn btn-outline-warning"> ⚡ Update Live Status</a>
       </div>
 
+    
       <div className="card-deck">
+        {/* <div class="card">
+          <img class="card-img-top" src="https://lh3.googleusercontent.com/pw/ACtC-3d8CpznyJCbdbAsNomKbBcF_jz5Yj1xGF0OdePC_XArTlw2q9T0q7_W-DHbrzwRsoOpt8rDfpnCk1e3t5FWH6OSe9_8oiId052ykWxZht4SEl5QrpMm6az20iE6TMAzUX9f4cDwRu4-tvk9WUUIvLiavw=w1840-h1226-no?authuser=0" alt="Card image cap" />
+          <div class="card-body">
+            <p className="card-text">🅿️ Parking 75% Full </p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div> */}
+        <div className="card">
+          <div className="card-body">
+            <p className="card-text">🅿️ Parking </p>
+          </div>
+          <img src="https://lh3.googleusercontent.com/pw/ACtC-3d8CpznyJCbdbAsNomKbBcF_jz5Yj1xGF0OdePC_XArTlw2q9T0q7_W-DHbrzwRsoOpt8rDfpnCk1e3t5FWH6OSe9_8oiId052ykWxZht4SEl5QrpMm6az20iE6TMAzUX9f4cDwRu4-tvk9WUUIvLiavw=w1840-h1226-no?authuser=0" alt="Card image" className="status-img" />
+          <div className="card-body">
+            <p className="card-text">75% Full</p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-body">
+            <p className="card-text"> ❄️ Weather </p>
+          </div>
+          <img src="https://lh3.googleusercontent.com/pw/ACtC-3e6hm4nmqR9HWG4fPUvAyeWoSo34lYA9J0vv01VgLPbI4zyvEZ-CESUVZnycYH-Xv6_M9MXnGFRPVZFPM_IFqY6ExQPKlM-2bGW9FOzuYEzevXsKz97QIbEg39i4zPXueR1GQk_jVD3uYtODbqBt8X8ZQ=w1840-h1226-no?authuser=0" alt="Card image" className="status-img" />
+          <div className="card-body">
+            <p className="card-text"> Thunder </p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-body">
+            <p className="card-text"> 🥾 Visitors </p>
+          </div>
+          <img src="https://lh3.googleusercontent.com/pw/ACtC-3f_QJYX55Fplkf43FB_1lXkjVLOj879wdVAiqOJiXkoUaP1fw_suexKflTRns3kQO1KRVj3jezRQT5V9JeutIc8UHRqRrFG9IiToFRoounFyIWAqJaQ1_40R6fvQ2BNczZ12YGQILNUxM6AzXn98xuvQg=w1840-h1226-no?authuser=0" alt="Card image" className="status-img" />
+          <div className="card-body">
+            <p className="card-text"> 5-10 ppl within 0.1mi</p>
+            <a className="card-link"> timestamp here </a>
+            <a href="#!" className="card-link"> See History </a>
+          </div>
+        </div>
+      </div>
+
+
+      {/* <div className="card-deck">
         <div className="card">
           <div className="card-header">
             <p> 🅿️ Parking </p>
@@ -105,7 +151,7 @@ const Trail = ({ externalID }) => {
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="card">
         <div className="card-header">
