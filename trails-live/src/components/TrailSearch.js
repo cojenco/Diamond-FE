@@ -91,7 +91,7 @@ const TrailSearch = (props) => {
 
 
   return (
-    <div className="container d-flex flex-column" >
+    <div className="d-flex flex-column trailsearch-main-container" >
 
       {/* <form onSubmit={onSelectSubmit}> */}
         <select value={stateSelected.value} onChange={onSelectState} className="custom-select">
