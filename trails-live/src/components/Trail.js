@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const Trail = ({ externalID }) => {
   const [ trailData, setTrailData ] = useState({});
+  const [ statusUpdates, setStatusUpdates ] = useState([]);
+  const [ subscriptions, setSubscriptions ] = useState(0);
   const BASE_URL = 'http://127.0.0.1:8000/diamondtrails'
 
 
@@ -18,6 +20,8 @@ const Trail = ({ externalID }) => {
       console.log('JOYFUL tears! Received data from all these layers')
       const newTrailData = response.data.trails[0];
       setTrailData(newTrailData);
+      setSubscriptions(response.data.subscriptions)
+      console.log(response.data.subscriptions)
     })
     .catch((error) => {
       console.log(error.message);
@@ -67,7 +71,7 @@ const Trail = ({ externalID }) => {
         {/* <span> {trailData.length} mi </span> */}
       </p>
       {/* <p>external_id is {externalID} </p> */}
-      <p> ❤️ oo people subscribed </p>
+      <p> ❤️  {subscriptions} subscribed within past 3 days </p>
 
       <div>
         <a href="#!" className="btn btn-outline-danger"> ❤️ Subscribe to Trail</a>

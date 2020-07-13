@@ -89,6 +89,12 @@ const TrailSearch = (props) => {
     );
   })
 
+  const stateOptions = USA.map((single_state) => {
+    return (
+    <option value={single_state}> {single_state} </option>
+    );
+  })
+
 
   return (
     <div className="d-flex flex-column trailsearch-main-container" >
@@ -96,10 +102,10 @@ const TrailSearch = (props) => {
       {/* <form onSubmit={onSelectSubmit}> */}
         <select value={stateSelected.value} onChange={onSelectState} className="custom-select">
           <option defaultValue>Select State</option>
+
           <option value="WA">WA</option>
-          <option value="WI">WI</option>
-          <option value="WV">WV</option>
-          <option value="WY">WY</option>
+
+          {stateOptions}
         </select>
       {/* </form> */}
 
@@ -136,23 +142,11 @@ const TrailSearch = (props) => {
   )
 }
 
-const COORDINATES = {
-  'WA' : {
-    'lat' : 47.751074,
-    'lng' : -120.740139,
-  },
-  'WI' : {
-    'lat' : 43.78444,
-    'lng' : -88.787868,
-  },
-  'WV' : {
-    'lat' : 38.597626,
-    'lng' : -80.454903,
-  },
-  'WY' : {
-    'lat' : 43.075968,
-    'lng' : -107.290284,
-  },
-}
+
+const USA = [
+  'AK','AL','AR','AZ','CA','CO','CT','DE','FL','GA','HI',
+  'IA','ID','IL','IN','KS','KY','LA','MA','MD','ME','MI','MN','MO','MS','MT',
+  'NC','ND','NE','NH','NJ','NM','NV','NY','OH','OK','OR','PA','RI','SC','SD',
+  'TN','TX','UT','VA','VT','WA','WI','WV','WY']
 
 export default TrailSearch;
