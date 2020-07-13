@@ -94,7 +94,7 @@ const Trail = ({ externalID }) => {
             <h3> Visitors </h3>
           </div>
           <div className="card-body">
-            <p className="card-text"> 🥾 Visitors 5-10 ppl within 0.1 mi </p>
+            <p className="card-text"> 🥾 Visitors 5-10 ppl within 500 ft </p>
             <a className="card-link"> timestamp here </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
