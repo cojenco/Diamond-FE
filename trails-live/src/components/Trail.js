@@ -5,10 +5,14 @@ import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-map
 import axios from 'axios';
 
 const Trail = ({ externalID }) => {
-  const [ trailData, setTrailData ] = useState({});
-  const [ statusUpdates, setStatusUpdates ] = useState([]);
-  const [ subscriptions, setSubscriptions ] = useState(0);
   const BASE_URL = 'http://127.0.0.1:8000/diamondtrails'
+  const emptyStatus = [{'message': 'SHARE LIVE STATUS', 'created_at': ''}]
+
+  const [ trailData, setTrailData ] = useState({});
+  const [ parkingStats, setParkingStats ] = useState([{'message': 'N/A', 'created_at': ' '}]);
+  const [ visitorStats, setVisitorStats ] = useState([{'message': 'N/A', 'created_at': ' '}]);
+  const [ weatherStats, setWeatherStats ] = useState(emptyStatus);
+  const [ subscriptions, setSubscriptions ] = useState(0);
 
 
   // Make API call when componentDidMount 
@@ -18,15 +22,40 @@ const Trail = ({ externalID }) => {
     .then((response) => {
       console.log(response.data.trails[0]);
       console.log('JOYFUL tears! Received data from all these layers')
+      console.log(response.data.weather_updates);
       const newTrailData = response.data.trails[0];
       setTrailData(newTrailData);
-      setSubscriptions(response.data.subscriptions)
-      console.log(response.data.subscriptions)
+      setSubscriptions(response.data.subscriptions);
+      setWeatherStats(response.data.weather_updates);
+
     })
     .catch((error) => {
       console.log(error.message);
     })
   }, []);
+
+  const weather_stat = () => {
+    let stats = emptyStatus[0].message;
+    if ( weatherStats.length !== 0 ) {
+      console.log('line 47');
+      console.log(weatherStats);
+      stats = weatherStats[0].message;
+    } 
+
+    return stats;
+  }
+
+
+  const weather_timestamp = () => {
+    let stats = emptyStatus[0].created_at;
+    if ( weatherStats.length !== 0 ) {
+      console.log('line 58');
+      console.log(weatherStats);
+      stats = weatherStats[0].created_at;
+    } 
+
+    return stats;
+  }
 
 
   const Map = () => {
@@ -70,7 +99,7 @@ const Trail = ({ externalID }) => {
         <span> {trailData.location} </span> 
         {/* <span> {trailData.length} mi </span> */}
       </p>
-      {/* <p>external_id is {externalID} </p> */}
+
       <p> ❤️  {subscriptions} subscribed within past 3 days </p>
 
       <div>
@@ -110,12 +139,48 @@ const Trail = ({ externalID }) => {
             <h3> Weather </h3>
           </div>
           <div className="card-body">
-            <p className="card-text"> ❄️ Weather Thunder </p>
-            <a className="card-link"> timestamp here </a>
+            <p className="card-text"> ❄️ Weather {weather_stat()} </p>
+            <a className="card-link"> {weather_timestamp()} </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
       </div>
+
+      { trailData.conditionStatus == 'Unknown' ? "" :
+      <div className="card">
+        <div className="card-header">
+          <p> 🚧 Other Conditions Update </p>
+        </div>
+        <div className="card-body">
+          <a className="card-link"> {trailData.conditionStatus} </a>
+          <a className="card-link"> {trailData.conditionDetails} </a>
+          <a className="card-link"> {trailData.conditionDate} </a>
+        </div>
+      </div>
+      }
+
+      <div className="card">
+        <div className="card-body">
+          <h4 className="card-title">  {trailData.name} </h4>
+          
+          <p className="card-text mb-2 text-muted"> {trailData.summary} </p>
+          <p className="card-text mb-2"> {trailData.location} </p>
+          <p className="card-text mb-2"> {trailData.length} Miles </p>
+          <p className="card-text mb-2 "> {trailData.ascent}' Up </p>
+          <p className="card-text mb-2 "> {trailData.descent}' Down </p>
+        </div>
+      </div>
+
+      {/* CURRENTLY END OF PAGE */}
+
+      {/* <div style={{ width: '85vw', height: '50vh'}} >
+        <WrappedMap 
+          googleMapURL= {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+          loadingElement={<div style={{ height: "100%" }} />}
+          containerElement={<div style={{ height: "100%" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+        />
+      </div> */}
 
 
       {/* <div className="card-deck">
@@ -187,39 +252,7 @@ const Trail = ({ externalID }) => {
           </div>
         </div>
       </div> */}
-      { trailData.conditionStatus == 'Unknown' ? "" :
-      <div className="card">
-        <div className="card-header">
-          <p> 🚧 Other Conditions Update </p>
-        </div>
-        <div className="card-body">
-          <a className="card-link"> {trailData.conditionStatus} </a>
-          <a className="card-link"> {trailData.conditionDetails} </a>
-          <a className="card-link"> {trailData.conditionDate} </a>
-        </div>
-      </div>
-      }
 
-      <div className="card">
-        <div className="card-body">
-          <h4 className="card-title">  {trailData.name} </h4>
-          
-          <p className="card-text mb-2 text-muted"> {trailData.summary} </p>
-          <p className="card-text mb-2"> {trailData.location} </p>
-          <p className="card-text mb-2"> {trailData.length} Miles </p>
-          <p className="card-text mb-2 "> {trailData.ascent}' Up </p>
-          <p className="card-text mb-2 "> {trailData.descent}' Down </p>
-        </div>
-      </div>
-
-      {/* <div style={{ width: '85vw', height: '50vh'}} >
-        <WrappedMap 
-          googleMapURL= {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "100%" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-        />
-      </div> */}
 
     </div>
   )
