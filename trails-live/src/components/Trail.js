@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Trail.css';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 import axios from 'axios';
-import Modal from 'react-bootstrap4-modal';
+import Subscribe from './Subscribe';
 
 
 const Trail = ({ externalID }) => {
@@ -148,7 +148,7 @@ const Trail = ({ externalID }) => {
       </div>
 
 
-      
+      <Subscribe trail={trailData} />
 
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
