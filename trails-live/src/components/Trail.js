@@ -39,8 +39,6 @@ const Trail = ({ externalID }) => {
   const weather_stat = () => {
     let stats = emptyStatus[0].message;
     if ( weatherStats.length !== 0 ) {
-      console.log('line 47');
-      console.log(weatherStats);
       stats = weatherStats[0].message;
     } 
 
@@ -50,8 +48,6 @@ const Trail = ({ externalID }) => {
   const weather_timestamp = () => {
     let stats = emptyStatus[0].created_at;
     if ( weatherStats.length !== 0 ) {
-      console.log('line 58');
-      console.log(weatherStats);
       stats = weatherStats[0].created_at;
     } 
 
@@ -62,8 +58,6 @@ const Trail = ({ externalID }) => {
   const parking_stat = () => {
     let stats = emptyStatus[0].message;
     if ( parkingStats.length !== 0 ) {
-      console.log('parking');
-      console.log(parkingStats);
       stats = parkingStats[0].message;
     } 
 
