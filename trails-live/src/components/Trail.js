@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import './Trail.css';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 import axios from 'axios';
+import Modal from 'react-bootstrap4-modal';
+
 
 const Trail = ({ externalID }) => {
   const BASE_URL = 'http://127.0.0.1:8000/diamondtrails'
@@ -118,6 +120,8 @@ const Trail = ({ externalID }) => {
   // </div>
   //////////////////////////////////////////////////
 
+  
+
 
   return (
     <div className="container trail-main-container ">
@@ -142,6 +146,40 @@ const Trail = ({ externalID }) => {
         <a href="#!" className="btn btn-outline-danger"> ❤️ Subscribe to Trail</a>
         <a href="#!" className="btn btn-outline-warning"> ⚡ Update Live Status</a>
       </div>
+
+
+      
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+      </button>
+
+      
+      <div class="modal" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
 
     
       <div className="card-deck">
