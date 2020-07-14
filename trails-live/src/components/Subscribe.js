@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './Subscribe.css';
@@ -6,17 +6,22 @@ import Modal from 'react-bootstrap4-modal';
 
 
 const Subscribe = ({trail}) => {
-  // event handling methods go here
+
+  const BASE_URL = 'http://127.0.0.1:8000/diamondtrails'
+
   const [isOpen, setIsOpen] = useState(false);
-  const [phoneInput, setPhoneInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState('');
+
 
   const showModal = () => {
     setIsOpen(true);
   }
 
+
   const hideModal = () => {
     setIsOpen(false);
   }
+
 
   const onPhoneInputChange = (event) => {
     let newInput = { ...phoneInput };
@@ -25,24 +30,50 @@ const Subscribe = ({trail}) => {
   }
 
 
+  const onSubscribeClick = () => {
+    // create params for API call
+    const externalID = trail.id
+    const params = {
+      'phone': phoneInput,
+      'trail': trail.name,
+      'external_id': externalID,
+    };
+    console.log(params);
+    // make API Call to save subscription to DB
+    axios
+    .post(`${BASE_URL}/trail/${externalID}/subscribe`, params)
+    .then((response) => {
+      console.log(response.data);
+      console.log('SENT OUT?!!!')
+    setIsOpen(false);
+    setPhoneInput('');
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  }
+
 
   return (
     <div>
-      <button class="btn btn-primary" onClick={showModal} >
-        Subscribe to Trail
+      <button class="btn btn-outline-danger" onClick={showModal} >
+        ❤️ Subscribe to Trail
       </button>
 
+
       <Modal visible={isOpen} onClickBackdrop={hideModal} className="text-center" >
-        <div className="modal-header">
+        <div className="modal-header text-center">
           <h5 className="modal-title text-center"> Subscribe to Trail </h5>
         </div>
+
         <div className="modal-body">
-          <p> {trail.name} <span> ({trail.length} mi)</span> </p>
+          <h6> {trail.name} <span> ({trail.length} mi)</span> </h6>
           <p className="text-muted"> {trail.location} </p>
         </div>
+
         <form>
           <div class="form-group">
-            <label for="tel-input" class="col-form-label">Phone</label>
+            <label for="tel-input" class="col-form-label">Enter Mobile to Receive SMS Updates</label>
             <input
             type='tel'
             name='tel-input'
@@ -54,20 +85,18 @@ const Subscribe = ({trail}) => {
             value={phoneInput}
           />
           </div>
-
         </form>
+
         <div className="modal-footer">
           <button type="button" className="btn btn-secondary" onClick={hideModal}>
             Cancel
           </button>
-          <button type="button" className="btn btn-primary" onClick={hideModal}>
+          <button type="button" className="btn btn-danger" onClick={onSubscribeClick}>
             Subscribe
           </button>
         </div>
       </Modal>
-
     </div>
-
   );
 }
 
