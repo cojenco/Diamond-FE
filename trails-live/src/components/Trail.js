@@ -9,8 +9,8 @@ const Trail = ({ externalID }) => {
   const emptyStatus = [{'message': 'SHARE LIVE STATUS', 'created_at': ''}]
 
   const [ trailData, setTrailData ] = useState({});
-  const [ parkingStats, setParkingStats ] = useState([{'message': 'N/A', 'created_at': ' '}]);
-  const [ visitorStats, setVisitorStats ] = useState([{'message': 'N/A', 'created_at': ' '}]);
+  const [ parkingStats, setParkingStats ] = useState(emptyStatus);
+  const [ visitorStats, setVisitorStats ] = useState(emptyStatus);
   const [ weatherStats, setWeatherStats ] = useState(emptyStatus);
   const [ subscriptions, setSubscriptions ] = useState(0);
 
@@ -27,6 +27,8 @@ const Trail = ({ externalID }) => {
       setTrailData(newTrailData);
       setSubscriptions(response.data.subscriptions);
       setWeatherStats(response.data.weather_updates);
+      setParkingStats(response.data.parking_updates);
+      setVisitorStats(response.data.visitor_updates);
 
     })
     .catch((error) => {
@@ -45,13 +47,53 @@ const Trail = ({ externalID }) => {
     return stats;
   }
 
-
   const weather_timestamp = () => {
     let stats = emptyStatus[0].created_at;
     if ( weatherStats.length !== 0 ) {
       console.log('line 58');
       console.log(weatherStats);
       stats = weatherStats[0].created_at;
+    } 
+
+    return stats;
+  }
+
+
+  const parking_stat = () => {
+    let stats = emptyStatus[0].message;
+    if ( parkingStats.length !== 0 ) {
+      console.log('parking');
+      console.log(parkingStats);
+      stats = parkingStats[0].message;
+    } 
+
+    return stats;
+  }
+
+  const parking_timestamp = () => {
+    let stats = emptyStatus[0].created_at;
+    if ( parkingStats.length !== 0 ) {
+      stats = parkingStats[0].created_at;
+    } 
+
+    return stats;
+  }
+
+
+  const visitor_stat = () => {
+    let stats = emptyStatus[0].message;
+    if ( visitorStats.length !== 0 ) {
+      stats = visitorStats[0].message;
+    } 
+
+    return stats;
+  }
+
+
+  const visitor_timestamp = () => {
+    let stats = emptyStatus[0].created_at;
+    if ( visitorStats.length !== 0 ) {
+      stats = visitorStats[0].created_at;
     } 
 
     return stats;
@@ -115,8 +157,8 @@ const Trail = ({ externalID }) => {
             <h3> Parking </h3>
           </div>
           <div className="card-body">
-            <p className="card-text">🅿️ Parking 75% Full </p>
-            <a className="card-link"> timestamp here </a>
+            <p className="card-text">🅿️ Parking {parking_stat()} </p>
+            <a className="card-link"> {parking_timestamp()} </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
@@ -127,8 +169,8 @@ const Trail = ({ externalID }) => {
             <h3> Visitors </h3>
           </div>
           <div className="card-body">
-            <p className="card-text"> 🥾 Visitors 5-10 ppl within 500 ft </p>
-            <a className="card-link"> timestamp here </a>
+            <p className="card-text"> 🥾 Visitors {visitor_stat()} </p>
+            <a className="card-link"> {visitor_timestamp()} </a>
             <a href="#!" className="card-link"> See History </a>
           </div>
         </div>
