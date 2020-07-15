@@ -4,6 +4,7 @@ import './Trail.css';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 import axios from 'axios';
 import Subscribe from './Subscribe';
+import LiveUpdate from './LiveUpdate';
 
 
 const Trail = ({ externalID }) => {
@@ -149,6 +150,7 @@ const Trail = ({ externalID }) => {
 
 
       <Subscribe trail={trailData} />
+      <LiveUpdate trail={trailData} />
 
     
       <div className="card-deck">

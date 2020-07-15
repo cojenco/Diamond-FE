@@ -56,7 +56,7 @@ const Subscribe = ({trail}) => {
 
   return (
     <div>
-      <button class="btn btn-outline-danger" onClick={showModal} >
+      <button className="btn btn-outline-danger" onClick={showModal} >
         ❤️ Subscribe to Trail
       </button>
 
@@ -72,8 +72,8 @@ const Subscribe = ({trail}) => {
         </div>
 
         <form>
-          <div class="form-group">
-            <label for="tel-input" class="col-form-label">Enter Mobile to Receive SMS Updates</label>
+          <div className="form-group">
+            <label htmlFor="tel-input" className="col-form-label">Enter Mobile to Receive SMS Updates</label>
             <input
             type='tel'
             name='tel-input'
