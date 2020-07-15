@@ -17,6 +17,17 @@ import Battery50Icon from '@material-ui/icons/Battery50';
 import Battery80Icon from '@material-ui/icons/Battery80';
 import BatteryAlertIcon from '@material-ui/icons/BatteryAlert';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
+import Filter9PlusIcon from '@material-ui/icons/Filter9Plus';
+import Filter1Icon from '@material-ui/icons/Filter1';
+import Filter5Icon from '@material-ui/icons/Filter5';
+import Forward5Icon from '@material-ui/icons/Forward5';
+import Forward10Icon from '@material-ui/icons/Forward10';
+import Forward30Icon from '@material-ui/icons/Forward30';
+import SignalCellular0BarIcon from '@material-ui/icons/SignalCellular0Bar';
+import SignalCellular1BarIcon from '@material-ui/icons/SignalCellular1Bar';
+import SignalCellular2BarIcon from '@material-ui/icons/SignalCellular2Bar';
+import SignalCellular3BarIcon from '@material-ui/icons/SignalCellular3Bar';
+import SignalCellular4BarIcon from '@material-ui/icons/SignalCellular4Bar';
 import Button from '@material-ui/core/Button';
 
 
@@ -67,10 +78,6 @@ const LiveUpdate = ({trail}) => {
   }
 
   const onWeatherClick = (event) => {
-
-    console.log(event);
-    console.log(event.value);
-    console.log(event.target.value);
     const update = {
       'category': event.target.name,
       'message': event.target.id,
@@ -81,13 +88,22 @@ const LiveUpdate = ({trail}) => {
     setWeatherUpdate(update);
   }
 
+
   const onParkingClick = (event) => {
-
-    console.log(event);
-    console.log(event.value);
-    console.log(event.target.value);
-
     const message = event.target.id + "% Full";
+    const update = {
+      'category': event.target.name,
+      'message': message,
+      'external_id': trail.id,
+    };
+
+    console.log(update);
+    setParkingUpdate(update);
+  }
+
+
+  const onVisitorClick = (event) => {
+    const message = event.target.id + " Visitors within 300ft";
     const update = {
       'category': event.target.name,
       'message': message,
@@ -129,48 +145,132 @@ const LiveUpdate = ({trail}) => {
         </div>
 
 
+
+        <div className="modal-body">
+          <h6> PARKING </h6>
+        </div>
+
         <div className="d-flex flex-row justify-content-center" >
-        <div className="custom-control custom-radio">
-          
-          <label className="custom-control-label" htmlFor="Sun">          
-          <IconButton color="secondary" aria-label="Sun" data-toggle="tooltip" data-placement="top" title="sun">
-            <WbSunnyIcon />
-          </IconButton>
-          </label>
-          <input type="radio" id="Sun" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+          <div className="custom-control custom-radio">
+            <input type="radio" id="0" name="Parking" className="custom-control-input" onClick={onParkingClick} />
+            <label className="custom-control-label" htmlFor="0">          
+            <IconButton color="primary" aria-label="capacity-0-full" data-toggle="tooltip" data-placement="top" title="Parking Available 100%">
+              <SignalCellular0BarIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="25" name="Parking" className="custom-control-input" onClick={onParkingClick} />
+            <label className="custom-control-label" htmlFor="25">          
+            <IconButton color="primary" aria-label="capacity-25-full" data-toggle="tooltip" data-placement="top" title="25% Full">
+              <SignalCellular1BarIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="50" name="Parking" className="custom-control-input" onClick={onParkingClick} />
+            <label className="custom-control-label" htmlFor="50">          
+            <IconButton color="primary" aria-label="capacity-50-full" data-toggle="tooltip" data-placement="top" title="50% Full">
+              <SignalCellular2BarIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="75" name="Parking" className="custom-control-input" onClick={onParkingClick} />
+            <label className="custom-control-label" htmlFor="75">          
+            <IconButton color="secondary" aria-label="capacity-75-full" data-toggle="tooltip" data-placement="top" title="75% Full">
+              <SignalCellular3BarIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="100" name="Parking" className="custom-control-input" onClick={onParkingClick} />
+            <label className="custom-control-label" htmlFor="100">          
+            <IconButton color="secondary" aria-label="capacity-100-full" data-toggle="tooltip" data-placement="top" title="100% Full">
+              <SignalCellular4BarIcon />
+            </IconButton>
+            </label>
+          </div>
         </div>
-        <div className="custom-control custom-radio">
-          <input type="radio" id="Rain" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
-          <label className="custom-control-label" htmlFor="Rain">          
-          <IconButton color="primary" aria-label="Rain" data-toggle="tooltip" data-placement="top" title="rain">
-            <BeachAccessIcon />
-          </IconButton>
-          </label>
+
+        <div className="modal-body">
+          <h6> VISITORS  </h6>
+          <p className="text-muted" > (within 300ft) </p>
         </div>
-        <div className="custom-control custom-radio">
-          <input type="radio" id="Thunder" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
-          <label className="custom-control-label" htmlFor="Thunder">          
-          <IconButton color="secondary" aria-label="Thunder" data-toggle="tooltip" data-placement="top" title="thunder" >
-            <FlashOnIcon />
-          </IconButton>
-          </label>
+
+        <div className="d-flex flex-row justify-content-center" >
+          <div className="custom-control custom-radio">
+            <input type="radio" id="1-5" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
+            <label className="custom-control-label" htmlFor="1-5">          
+            <IconButton size="large" color="primary" aria-label="1-5visitorsinsight" data-toggle="tooltip" data-placement="top" title="1-5 visitors in 300ft">
+              <Filter1Icon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="5-9" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
+            <label className="custom-control-label" htmlFor="5-9">          
+            <IconButton size="large" color="primary" aria-label="5-9visitorsinsight" data-toggle="tooltip" data-placement="top" title="5-9 visitors in 300ft">
+              <Filter5Icon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="9+" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
+            <label className="custom-control-label" htmlFor="9+">          
+            <IconButton size="large" color="secondary" aria-label="9plusvisitorsinsight" data-toggle="tooltip" data-placement="top" title="9+ visitors in 300ft">
+              <Filter9PlusIcon />
+            </IconButton>
+            </label>
+          </div>
         </div>
-        <div className="custom-control custom-radio">
-          <input type="radio" id="Hail" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
-          <label className="custom-control-label" htmlFor="Hail">          
-          <IconButton color="secondary" aria-label="Hail" data-toggle="tooltip" data-placement="top" title="hail" >
-            <GrainIcon />
-          </IconButton>
-          </label>
+
+        <div className="modal-body">
+          <h6> WEATHER </h6>
         </div>
-        <div className="custom-control custom-radio">
-          <input type="radio" id="Snow" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
-          <label className="custom-control-label" htmlFor="Snow">          
-          <IconButton color="primary" aria-label="Snow" onClick={onWeatherClick} value="Snow" data-toggle="tooltip" data-placement="top" title="snow" >
-            <AcUnitIcon name="Snow" />
-          </IconButton>
-          </label>
-        </div>
+
+
+        <div className="d-flex flex-row justify-content-center" >
+          <div className="custom-control custom-radio">
+            <input type="radio" id="Sun" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+            <label className="custom-control-label" htmlFor="Sun">          
+            <IconButton color="secondary" aria-label="Sun" data-toggle="tooltip" data-placement="top" title="sun">
+              <WbSunnyIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="Rain" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+            <label className="custom-control-label" htmlFor="Rain">          
+            <IconButton color="primary" aria-label="Rain" data-toggle="tooltip" data-placement="top" title="rain">
+              <BeachAccessIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="Thunder" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+            <label className="custom-control-label" htmlFor="Thunder">          
+            <IconButton color="secondary" aria-label="Thunder" data-toggle="tooltip" data-placement="top" title="thunder" >
+              <FlashOnIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="Hail" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+            <label className="custom-control-label" htmlFor="Hail">          
+            <IconButton color="secondary" aria-label="Hail" data-toggle="tooltip" data-placement="top" title="hail" >
+              <GrainIcon />
+            </IconButton>
+            </label>
+          </div>
+          <div className="custom-control custom-radio">
+            <input type="radio" id="Snow" name="Weather" className="custom-control-input" onClick={onWeatherClick} />
+            <label className="custom-control-label" htmlFor="Snow">          
+            <IconButton color="primary" aria-label="Snow" onClick={onWeatherClick} value="Snow" data-toggle="tooltip" data-placement="top" title="snow" >
+              <AcUnitIcon name="Snow" />
+            </IconButton>
+            </label>
+          </div>
         </div>
 
         {/* <Button
@@ -206,7 +306,7 @@ const LiveUpdate = ({trail}) => {
         </div> */}
 
 
-        <div className="modal-body">
+        {/* <div className="modal-body">
           <h6> Parking </h6>
         </div>
 
@@ -252,8 +352,9 @@ const LiveUpdate = ({trail}) => {
             </IconButton>
             </label>
           </div>
+        </div> */}
 
-        </div>
+
 
 
         <div className="modal-footer">
