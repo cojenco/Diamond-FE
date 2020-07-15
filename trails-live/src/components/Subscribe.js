@@ -5,6 +5,7 @@ import './Subscribe.css';
 import Modal from 'react-bootstrap4-modal';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Button from '@material-ui/core/Button';
 
 
 const Subscribe = ({trail}) => {
@@ -58,9 +59,21 @@ const Subscribe = ({trail}) => {
 
   return (
     <div>
-      <button className="btn btn-outline-danger" onClick={showModal} >
+      {/* <button className="btn btn-outline-danger" onClick={showModal} >
         ❤️ Subscribe to Trail
-      </button>
+      </button> */}
+
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        className=""
+        startIcon={<FavoriteIcon />}
+        onClick={showModal}
+        value="Thunder"
+      >
+        Subscribe to Trail
+      </Button>
 
 
       <Modal visible={isOpen} onClickBackdrop={hideModal} className="text-center" >

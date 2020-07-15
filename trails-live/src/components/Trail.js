@@ -143,10 +143,10 @@ const Trail = ({ externalID }) => {
 
       <p> ❤️  {subscriptions} subscribed within past 3 days </p>
 
-      <div>
-        {/* <a href="#!" className="btn btn-outline-danger"> ❤️ Subscribe to Trail</a> */}
+      {/* <div>
+        <a href="#!" className="btn btn-outline-danger"> ❤️ Subscribe to Trail</a>
         <a href="#!" className="btn btn-outline-warning"> ⚡ Update Live Status</a>
-      </div>
+      </div> */}
 
 
       <Subscribe trail={trailData} />

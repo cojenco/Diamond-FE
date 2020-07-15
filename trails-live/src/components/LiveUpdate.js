@@ -4,9 +4,6 @@ import axios from 'axios';
 import './LiveUpdate.css';
 import Modal from 'react-bootstrap4-modal';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import CloudIcon from '@material-ui/icons/Cloud';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
@@ -40,6 +37,7 @@ const LiveUpdate = ({trail}) => {
   const [phoneInput, setPhoneInput] = useState('');
   const [weatherUpdate, setWeatherUpdate] = useState({});
   const [parkingUpdate, setParkingUpdate] = useState({});
+  const [visitorUpdate, setVisitorUpdate] = useState({});
 
 
   const showModal = () => {
@@ -50,32 +48,38 @@ const LiveUpdate = ({trail}) => {
   const hideModal = () => {
     setWeatherUpdate({});
     setParkingUpdate({});
+    setVisitorUpdate({});
     setIsOpen(false);
   }
 
 
   const onLiveUpdateClick = () => {
-    // create params for API call
-    const externalID = trail.id
-    const params = {
-      'phone': phoneInput,
-      'trail': trail.name,
-      'external_id': externalID,
-    };
-    console.log(params);
-    // make API Call to save subscription to DB
-    // axios
-    // .post(`${BASE_URL}/trail/${externalID}/subscribe`, params)
-    // .then((response) => {
-    //   console.log(response.data);
-    //   console.log('SENT OUT?!!!')
-    // setIsOpen(false);
-    // setPhoneInput('');
-    // })
-    // .catch((error) => {
-    //   console.log(error.message);
-    // });
+
+    if (!parkingUpdate.message && !visitorUpdate.message && !weatherUpdate.message) {
+      console.log('No updates tracked');
+      return;
+    } 
+
+    const externalID = trail.id;
+    const updates = [ parkingUpdate, visitorUpdate, weatherUpdate ];
+
+    for (let update of updates) {
+      if (update.message) {
+        axios
+        .post(`${BASE_URL}/trail/${externalID}/live-update`, update)
+        .then((response) => {
+          console.log(response.data);
+          console.log('SENT OUT?!!!')
+        setIsOpen(false);
+        setPhoneInput('');
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+      }
+    }
   }
+
 
   const onWeatherClick = (event) => {
     const update = {
@@ -111,16 +115,12 @@ const LiveUpdate = ({trail}) => {
     };
 
     console.log(update);
-    setParkingUpdate(update);
+    setVisitorUpdate(update);
   }
 
 
   return (
     <div>
-      {/* <button className="btn btn-warning" onClick={showModal} >
-       ⚡ Update Live Status
-      </button> */}
-
       <Button
         variant="contained"
         color="primary"
@@ -143,8 +143,6 @@ const LiveUpdate = ({trail}) => {
           <h6> {trail.name} <span> ({trail.length} mi)</span> </h6>
           <p className="text-muted"> {trail.location} </p>
         </div>
-
-
 
         <div className="modal-body">
           <h6> PARKING </h6>
@@ -202,7 +200,7 @@ const LiveUpdate = ({trail}) => {
           <div className="custom-control custom-radio">
             <input type="radio" id="1-5" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
             <label className="custom-control-label" htmlFor="1-5">          
-            <IconButton size="large" color="primary" aria-label="1-5visitorsinsight" data-toggle="tooltip" data-placement="top" title="1-5 visitors in 300ft">
+            <IconButton color="primary" aria-label="1-5visitorsinsight" data-toggle="tooltip" data-placement="top" title="1-5 visitors in 300ft">
               <Filter1Icon />
             </IconButton>
             </label>
@@ -210,7 +208,7 @@ const LiveUpdate = ({trail}) => {
           <div className="custom-control custom-radio">
             <input type="radio" id="5-9" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
             <label className="custom-control-label" htmlFor="5-9">          
-            <IconButton size="large" color="primary" aria-label="5-9visitorsinsight" data-toggle="tooltip" data-placement="top" title="5-9 visitors in 300ft">
+            <IconButton color="primary" aria-label="5-9visitorsinsight" data-toggle="tooltip" data-placement="top" title="5-9 visitors in 300ft">
               <Filter5Icon />
             </IconButton>
             </label>
@@ -218,7 +216,7 @@ const LiveUpdate = ({trail}) => {
           <div className="custom-control custom-radio">
             <input type="radio" id="9+" name="Visitor" className="custom-control-input" onClick={onVisitorClick} />
             <label className="custom-control-label" htmlFor="9+">          
-            <IconButton size="large" color="secondary" aria-label="9plusvisitorsinsight" data-toggle="tooltip" data-placement="top" title="9+ visitors in 300ft">
+            <IconButton color="secondary" aria-label="9plusvisitorsinsight" data-toggle="tooltip" data-placement="top" title="9+ visitors in 300ft">
               <Filter9PlusIcon />
             </IconButton>
             </label>
@@ -228,7 +226,6 @@ const LiveUpdate = ({trail}) => {
         <div className="modal-body">
           <h6> WEATHER </h6>
         </div>
-
 
         <div className="d-flex flex-row justify-content-center" >
           <div className="custom-control custom-radio">
@@ -273,18 +270,6 @@ const LiveUpdate = ({trail}) => {
           </div>
         </div>
 
-        {/* <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          className=""
-          startIcon={<FlashOnIcon />}
-          onClick={onWeatherClick}
-          value="Thunder"
-        >
-          Thunder
-        </Button> */}
-
 
 
         {/* <div>
@@ -304,57 +289,6 @@ const LiveUpdate = ({trail}) => {
             <AcUnitIcon name="Snow" />
           </IconButton>
         </div> */}
-
-
-        {/* <div className="modal-body">
-          <h6> Parking </h6>
-        </div>
-
-        <div className="d-flex flex-row justify-content-center" >
-          <div className="custom-control custom-radio">
-            
-            <label className="custom-control-label" htmlFor="0">          
-            <IconButton color="primary" aria-label="capacity-0-full" data-toggle="tooltip" data-placement="top" title="Parking Available 100%">
-              <LocalParkingIcon />
-            </IconButton>
-            </label>
-            <input type="radio" id="0" name="Parking" className="custom-control-input" onClick={onParkingClick} />
-          </div>
-          <div className="custom-control custom-radio">
-            <input type="radio" id="25" name="Parking" className="custom-control-input" onClick={onParkingClick} />
-            <label className="custom-control-label" htmlFor="25">          
-            <IconButton color="primary" aria-label="capacity-25-full" data-toggle="tooltip" data-placement="top" title="25% Full">
-              <Battery20Icon />
-            </IconButton>
-            </label>
-          </div>
-          <div className="custom-control custom-radio">
-            <input type="radio" id="50" name="Parking" className="custom-control-input" onClick={onParkingClick} />
-            <label className="custom-control-label" htmlFor="50">          
-            <IconButton color="primary" aria-label="capacity-50-full" data-toggle="tooltip" data-placement="top" title="50% Full">
-              <Battery50Icon />
-            </IconButton>
-            </label>
-          </div>
-          <div className="custom-control custom-radio">
-            <input type="radio" id="75" name="Parking" className="custom-control-input" onClick={onParkingClick} />
-            <label className="custom-control-label" htmlFor="75">          
-            <IconButton color="secondary" aria-label="capacity-75-full" data-toggle="tooltip" data-placement="top" title="75% Full">
-              <Battery80Icon />
-            </IconButton>
-            </label>
-          </div>
-          <div className="custom-control custom-radio">
-            <input type="radio" id="100" name="Parking" className="custom-control-input" onClick={onParkingClick} />
-            <label className="custom-control-label" htmlFor="100">          
-            <IconButton color="secondary" aria-label="capacity-100-full" data-toggle="tooltip" data-placement="top" title="100% Full">
-              <BatteryAlertIcon />
-            </IconButton>
-            </label>
-          </div>
-        </div> */}
-
-
 
 
         <div className="modal-footer">
